@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Assets.Scripts.Combat
 {
-    internal interface ITimingSystem
+    public interface ITimingSystem
     {
     }
 }
