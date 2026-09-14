@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Characters;
-using Assets.Scripts.Combat;
+using Assets.Scripts.Combat.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;

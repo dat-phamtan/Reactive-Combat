@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Assets.Scripts.Combat
+namespace Assets.Scripts.Combat.Interfaces
 {
     public interface ICombatCommand
     {
