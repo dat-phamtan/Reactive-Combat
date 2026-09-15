@@ -10,6 +10,9 @@ namespace Assets.Scripts.Combat.Implements
     {
         private InputAction _confirm;
         private InputAction _parry;
+        private Action<InputAction.CallbackContext> _onConfirm;
+        private Action<InputAction.CallbackContext> _onParry;
+
         public event Action<CombatInputAction> OnActionPressed;
 
         public CombatInputProvider(InputActionAsset inputActions)
@@ -19,14 +22,17 @@ namespace Assets.Scripts.Combat.Implements
             _confirm = combatMap.FindAction("ConfirmTiming");
             _parry = combatMap.FindAction("Parry");
 
-            _confirm.performed += (action) => OnActionPressed?.Invoke(CombatInputAction.Confirm);
-            _parry.performed += (action) => OnActionPressed?.Invoke(CombatInputAction.Parry);
+            _onConfirm = _ => OnActionPressed?.Invoke(CombatInputAction.Confirm);
+            _onParry = _ => OnActionPressed?.Invoke(CombatInputAction.Parry);
+
+            _confirm.performed += _onConfirm;
+            _parry.performed += _onParry;
         }
         
         public void Dispose()
         {
-            _confirm.performed -= (action) => OnActionPressed?.Invoke(CombatInputAction.Confirm);
-            _parry.performed -= (action) => OnActionPressed?.Invoke(CombatInputAction.Parry);
+            _confirm.performed -= _onConfirm;
+            _parry.performed -= _onParry;
         }
     }
 }
