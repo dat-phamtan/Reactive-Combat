@@ -8,8 +8,8 @@ namespace Assets.Scripts.Combat.Implements
 {
     public class CombatInputProvider : ICombatInputProvider, IDisposable
     {
-        private InputAction _confirm;
-        private InputAction _parry;
+        private readonly InputAction _confirm;
+        private readonly InputAction _parry;
         private Action<InputAction.CallbackContext> _onConfirm;
         private Action<InputAction.CallbackContext> _onParry;
 

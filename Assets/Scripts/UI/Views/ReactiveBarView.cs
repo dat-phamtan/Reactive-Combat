@@ -12,21 +12,28 @@ public class ReactiveBarView : MonoBehaviour
 
     public void Show(float duration)
     {
-
+        _duration = duration;
+        Debug.Log("Animation showed");
     }
 
     public void UpdateProgress(float elapsed)
     {
+        if (_fillImage == null || _duration <= 0f)
+            return;
 
+        float fillAmount = Mathf.Clamp01(elapsed / _duration);
+        Debug.Log($"Update progress: {fillAmount}");
     }
 
     public void ShowResult(TimingResult result)
     {
-
+        if (_fillImage == null)
+            return;
+        Debug.Log($"Show result: {result}");
     }
 
     public void Hide()
     {
-
+        gameObject.SetActive(false);
     }
 }

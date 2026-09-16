@@ -11,6 +11,7 @@ public class TimingInputController : MonoBehaviour
     [SerializeField] private ReactiveBarView _barView;
 
     private float _elapsed;
+    private float _duration;
     private bool _isTracking;
     private ITimingSystem _timingSystem;
     private ICombatInputProvider _inputProvider;
@@ -27,6 +28,7 @@ public class TimingInputController : MonoBehaviour
     public void BeginWindow(TimingWindowConfig config)
     {
         _elapsed = 0;
+        _duration = config.duration;
         _isTracking = true;
         _timingSystem.OpenWindow(config);
         _barView.Show(config.duration);
@@ -44,7 +46,11 @@ public class TimingInputController : MonoBehaviour
             _isTracking = false;
             return;
         }
-        _timingSystem.CloseWindow(_elapsed);
+
+        if (_elapsed >= _duration)
+        {
+            _timingSystem.CloseWindow(_elapsed); 
+        }
     }
 
     private void HandleInput(CombatInputAction action)
